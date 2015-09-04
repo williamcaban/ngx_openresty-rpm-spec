@@ -8,8 +8,8 @@ Group:		Productivity/Networking/Web/Servers
 License:	BSD
 URL:		openresty.org
 Source0:	http://openresty.org/download/%{name}-%{version}.tar.gz
-Source1:	ngx_openresty.services
-Packager: William Caban <william.caban@savantadvisors.com>
+Source1:	https://raw.githubusercontent.com/williamcaban/ngx_openresty-rpm-spec/master/SOURCES/ngx_openresty.service
+Packager:   William Caban <william.caban@savantadvisors.com>
 
 BuildRequires:	sed git make gcc postgresql-devel readline-devel pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel gd-devel geoip-devel gperftools-devel libatomic_ops-devel
 Requires:	postgresql readline pcre openssl pcre libxml2 libxslt gd geoip gperftools libatomic
@@ -113,7 +113,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-#%{homedir}/*
 
 %attr(755,root,root) /usr/lib/systemd/system/ngx_openresty.service
 %{homedir}/luajit
