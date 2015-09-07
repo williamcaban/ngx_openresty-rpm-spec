@@ -72,7 +72,7 @@ First, install the required packages for the RPM build environment:
 	yum -y install git make gcc sed postgresql-devel readline-devel \
 	pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel \
 	gd-devel geoip-devel gperftools-devel libatomic_ops-devel rpm-build \
-	gperftools-devel
+	gperftools-devel lua-devel
 
 
 Second, create the rpmbuild path:
@@ -97,7 +97,7 @@ INSTALLATING THE RPM
 
 To install the resulting RPM and all the RPM dependencies:
 
-	yum -y install ~/rpmbuild/RPMS/x86_64/ngx_openresty-1.9.3.1-1.el7.centos.x86_64.rpm
+	yum -y install ~/rpmbuild/RPMS/x86_64/ngx_openresty-1.9.3.1-2.el7.centos.x86_64.rpm
 
 
 STARTING THE SERVICE
