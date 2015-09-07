@@ -43,6 +43,9 @@ The following **NGINX** modules are enabled with this package:
 - md5-asm
 - sha1-asm
 - libatomic 
+- pcre-jit
+- luajit
+- lua51
 
 USING THE BUILD & INSTALL SCRIPT
 --------------------------------

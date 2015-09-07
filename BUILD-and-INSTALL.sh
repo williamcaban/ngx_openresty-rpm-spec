@@ -8,7 +8,7 @@ install_required_packages()
 	yum -y install git make gcc sed postgresql-devel readline-devel \
 	pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel \
 	gd-devel geoip-devel gperftools-devel libatomic_ops-devel rpm-build \
-	gperftools-devel
+	gperftools-devel lua-devel
 }
 
 create_building_environment()

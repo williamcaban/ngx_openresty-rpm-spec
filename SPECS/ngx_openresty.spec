@@ -1,6 +1,6 @@
 Name:		ngx_openresty
 Version:	1.9.3.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	a fast web app server by extending nginx
 Distribution: CentOS 7
 
@@ -11,7 +11,7 @@ Source0:	http://openresty.org/download/%{name}-%{version}.tar.gz
 Source1:	https://raw.githubusercontent.com/williamcaban/ngx_openresty-rpm-spec/master/SOURCES/ngx_openresty.service
 Packager:   William Caban <william.caban@savantadvisors.com>
 
-BuildRequires:	sed git make gcc postgresql-devel readline-devel pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel gd-devel geoip-devel gperftools-devel libatomic_ops-devel
+BuildRequires:	sed git make gcc postgresql-devel readline-devel pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel gd-devel geoip-devel gperftools-devel libatomic_ops-devel lua-devel
 Requires:	postgresql readline pcre openssl pcre libxml2 libxslt gd geoip gperftools libatomic
 Requires(pre):	shadow-utils
 
@@ -53,7 +53,10 @@ pcre
 pcre-jit
 md5-asm
 sha1-asm
-libatomic 
+libatomic
+pcre-jit
+luajit
+lua51
 
 %prep
 %setup -q
@@ -89,7 +92,10 @@ libatomic
 --with-pcre-jit \
 --with-md5-asm \
 --with-sha1-asm \
---with-libatomic 
+--with-libatomic \
+--with-pcre-jit \
+--with-luajit \
+--with-lua51
 
 make %{?_smp_mflags}
 
@@ -157,6 +163,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Sep 06 2015 William Caban <william.caban@savantadvisors.com> 1.9.3.1-2
+- Add explicit support for pcre-jit, luajit, lua51
+
 * Thu Sep 03 2015 William Caban <william.caban@savantadvisors.com> 1.9.3.1-1
 - Initial SVNT RPM release
 - Based on work by Brent Thomson https://github.com/brnt/openresty-rpm-spec
