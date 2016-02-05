@@ -1,6 +1,6 @@
 Name:		ngx_openresty
-Version:	1.9.3.1
-Release:	2%{?dist}
+Version:	1.9.7.2
+Release:	3%{?dist}
 Summary:	a fast web app server by extending nginx
 Distribution: CentOS 7
 
@@ -22,7 +22,7 @@ Requires(pre):	shadow-utils
 OpenResty (aka. ngx_openresty) is a full-fledged web application server by bundling the standard Nginx core,
 lots of 3rd-party Nginx modules, as well as most of their external dependencies.
 
-OpenResty is not an Nginx fork. It is just a software bundle. 
+OpenResty is not an Nginx fork. It is just a software bundle.
 
 The following NGINX modules are enabled with this package:
 http_iconv_module
@@ -163,7 +163,10 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Thu Sep 06 2015 William Caban <william.caban@savantadvisors.com> 1.9.3.1-2
+* Fri Feb 05 2016 Lee Trout <lee@yhathq.com> 1.9.7.2-3
+- Remove Postgres & Bump version to 1.9.7.2
+
+* Sun Sep 06 2015 William Caban <william.caban@savantadvisors.com> 1.9.3.1-2
 - Add explicit support for pcre-jit, luajit, lua51
 
 * Thu Sep 03 2015 William Caban <william.caban@savantadvisors.com> 1.9.3.1-1
