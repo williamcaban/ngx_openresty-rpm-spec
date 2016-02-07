@@ -1,0 +1,26 @@
+image: centos
+
+before_script:
+- echo "before script"
+
+stages:
+- build
+- test
+- deploy
+
+build_job:
+  stage: build
+  script:
+  - BUILD-and-INSTALL.sh go
+
+test_job:
+  stage: test
+  script:
+  - echo "Test script here"
+
+deploy_job:
+  stage: deploy
+  script:
+  - BUILD-and-INSTALL.sh go
+
+

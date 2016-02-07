@@ -56,7 +56,7 @@ First, the scripts assumes it is using the folder `~/ngx_openresty-rpm-spec/`
 
 	git clone https://github.com/williamcaban/ngx_openresty-rpm-spec.git
 
-Second, execute the Build & Isntall (script assumes it is running as root and that these sources
+Second, execute the Build & Install (script assumes it is running as root and that these sources
 are copied into `~/ngx_openresty-rpm-spec/`
 
 	~/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh
