@@ -3,7 +3,7 @@ ngx_openresty-rpm-spec for CentOS 7
 
 This spec file will build an **OpenResty** [http://openresty.org]() RPM for **CentOS 7**. It has been tested with CentOS 7, but it should work with any RedHat 7 based Linux.
 
-To simplify the build and test process the `BUILD-and-INSTALL.sh` bash scripts will take care of creating the build directories, installing the required dependencies for the build environment and the installation of the resulting RPM.
+To simplify the build and test process the `BUILDME.sh` bash scripts will take care of creating the build directories, installing the required dependencies for the build environment and the installation of the resulting RPM.
 
 The RPM will install all files and binaries under `/opt/ngx_openresty`
 
@@ -52,15 +52,25 @@ USING THE BUILD & INSTALL SCRIPT
 
 You can build the RPM manually or use the Build & Install script.
 
-First, the scripts assumes it is using the folder `~/ngx_openresty-rpm-spec/`
+First, the scripts assumes it is using the current working directory.
 
 	git clone https://github.com/williamcaban/ngx_openresty-rpm-spec.git
 
 Second, execute the Build & Install (script assumes it is running as root and that these sources
-are copied into `~/ngx_openresty-rpm-spec/`
+are copied into the current working directory.
 
-	~/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh
+	./BUILDME.sh
 
+Script will run interactive mode if execution mode is not specified.
+
+```
+./BUILDME.sh [ --help | help | install | buildonly | buildauto | buildinstall ]
+        --help | help    Display this help. (Also supports '-h')
+        install          Install RPM package
+        buildonly        Build RPM package (assume pre-requisites have been met)
+        buildauto        Install build pre-requisites and build RPM package
+        buildinstall     Build and install RPM (install build pre-requisites)
+```
 
 USING MANUAL BUILD
 ------------------
@@ -77,19 +87,19 @@ First, install the required packages for the RPM build environment:
 
 Second, create the rpmbuild path:
 
-	mkdir -p ~/rpmbuild/{SOURCES,SPECS}
+	mkdir -p ./rpmbuild/{SOURCES,SPECS}
 
 Third, copy or download source files into correct folders:
 
-	cp ~/ngx_openresty-rpm-spec/SOURCES/ngx_openresty.service ~/rpmbuild/SOURCES/
-	cp ~/ngx_openresty-rpm-spec/SPECS/ngx_openresty.spec ~/rpmbuild/SPECS/
-	curl -o ~/rpmbuild/SOURCES/ngx_openresty-1.9.3.1.tar.gz  https://openresty.org/download/ngx_openresty-1.9.3.1.tar.gz
+	cp ./SOURCES/ngx_openresty.service ./rpmbuild/SOURCES/
+	cp ./SPECS/ngx_openresty.spec ./rpmbuild/SPECS/
+	curl -o ./rpmbuild/SOURCES/ngx_openresty-1.9.3.1.tar.gz  https://openresty.org/download/ngx_openresty-1.9.3.1.tar.gz
 
 Finally, build the RPM:
 
-	rpmbuild -ba ~/rpmbuild/SPECS/ngx_openresty.spec
+	rpmbuild -ba ./rpmbuild/SPECS/ngx_openresty.spec
 
-The resulting RPMs will be in `~/rpmbuild/RPMS/{platform}/` and the SRPM will be in `~/rpmbuild/SRPMS/`.
+The resulting RPMs will be in `./rpmbuild/RPMS/{platform}/` and the SRPM will be in `~/rpmbuild/SRPMS/`.
 
 
 INSTALLATING THE RPM
@@ -97,7 +107,7 @@ INSTALLATING THE RPM
 
 To install the resulting RPM and all the RPM dependencies:
 
-	yum -y install ~/rpmbuild/RPMS/x86_64/ngx_openresty-1.9.3.1-2.el7.centos.x86_64.rpm
+	yum -y install ./rpmbuild/RPMS/x86_64/ngx_openresty-1.9.3.1-2.el7.centos.x86_64.rpm
 
 
 STARTING THE SERVICE
@@ -106,13 +116,21 @@ The NGINX process can be started with the following command:
 
 	systemctl start ngx_openresty
 
+To enable the process to automatically start when machines start execute the following command:
+
+	systemctl enable ngx_openresty
+
 
 **IMPORTANT:** If you are using some other web server in the same server as your RPM build server, make sure to modify the configuration of one of the servers to run in a port diferent from port 80 (http default port).
 
 
+FUTURE WORK
+===========
+Support for sub-packages for each module or set of modules.
 
-
-
-
-
-
+Support build and deploy of the RPM for multiple dev & deployment environments:
+- Docker (reference included)
+- Vagrant (reference included)
+- Ansible?
+- SaltStack?
+- Puppet?

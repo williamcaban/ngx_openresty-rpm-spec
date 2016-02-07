@@ -1,26 +1,20 @@
 image: centos
 
 before_script:
-- echo "Starting script"
+- echo "Starting Gitlab-CI script"
 
 stages:
 - build
-- test
 - deploy
 
 build_job:
   stage: build
   script:
-  - /builds/william/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh go
-
-test_job:
-  stage: test
-  script:
-  - echo "Test script here"
+  - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildauto
 
 deploy_job:
   stage: deploy
   script:
-  - /builds/william/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh go
+  - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildinstall
 
 

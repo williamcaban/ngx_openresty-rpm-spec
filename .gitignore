@@ -1,2 +1,3 @@
 .vagrant
 SOURCES/*.gz
+.DS_Store

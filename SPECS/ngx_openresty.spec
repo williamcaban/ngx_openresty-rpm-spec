@@ -1,6 +1,6 @@
 Name:		ngx_openresty
 Version:	1.9.7.2
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	a fast web app server by extending nginx
 Distribution: CentOS 7
 
@@ -163,6 +163,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 06 2016 William Caban <william.caban@savantadvisors.com> 1.9.7.2-4
+- Modifications to BUILD script to support multiple actions (install, buildonly, buildauto, buildinstall) 
+- Initial support to Gitlab-CI with docker runners
+
 * Fri Feb 05 2016 Lee Trout <lee@yhathq.com> 1.9.7.2-3
 - Remove Postgres & Bump version to 1.9.7.2
 
