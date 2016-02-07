@@ -13,6 +13,7 @@ if [[ ! "$USER" == "root" ]]; then
 fi
 # Try to fix an issue with containers
 echo "INITIAL HOME:" ${HOME}, "INITIAL HERE" ${HERE}
+ll ${HERE} #DEBUG
 
 install_required_packages()
 {
@@ -28,6 +29,7 @@ create_building_environment()
 {
 	echo -e "\nCreating directory structure and setting up SOURCES...."
 	mkdir -p ${HOME}/buildroot/{SOURCES,SPECS}
+	ls -lR ${HOME} # DEBUG
 	cp ${HERE}/SOURCES/ngx_openresty.service ${HOME}/buildroot/SOURCES/
 	if [ ! -f ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nDownloading tar.gz source from openresty..."
@@ -35,6 +37,8 @@ create_building_environment()
 	fi
 	cp ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ${HOME}/buildroot/SOURCES/
 	cp ${HERE}/SPECS/ngx_openresty.spec ${HOME}/buildroot/SPECS/
+	echo "DEBUG"
+	ls -lR ${HOME} # DEBUG
 }
 
 build_package()
@@ -103,12 +107,12 @@ case $1 in
 		build_package
 		;;
 	"buildauto")
-		install_required_packages
+		#install_required_packages
 		create_building_environment
 		build_package
 		;;
 	"buildinstall")
-		install_required_packages
+		#install_required_packages
 		create_building_environment
 		build_package
 		install_test_package
