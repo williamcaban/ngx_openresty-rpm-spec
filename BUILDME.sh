@@ -11,11 +11,8 @@ PWD=`pwd`
 if [[ ! "$USER" == "root" ]]; then
 	SUDO="sudo"
 fi
-
 # Try to fix an issue with containers
-echo "Current dir:" ${PWD}
-cd ${HERE}
-echo "New Current dir:" `pwd`
+echo "INITIAL PWD:" `pwd`, "INITIAL HERE" ${HERE}
 
 install_required_packages()
 {
@@ -29,6 +26,10 @@ install_required_packages()
 
 create_building_environment()
 {
+	# Try to fix an issue with containers
+	echo "create_building_environment PWD:" `pwd`
+	cd ${HERE}
+
 	echo -e "\nCreating directory structure and setting up SOURCES...."
 	mkdir -p ${HERE}/rpmbuild/{SOURCES,SPECS}
 	cp ${HERE}/SOURCES/ngx_openresty.service ${HERE}/rpmbuild/SOURCES/
@@ -42,6 +43,10 @@ create_building_environment()
 
 build_package()
 {
+	# Try to fix an issue with containers
+	echo "build_package PWD:" `pwd`
+	cd ${HERE}
+
 	if [  -f ${HERE}/rpmbuild/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nBuilding package...."
 		rpmbuild -ba ${HERE}/rpmbuild/SPECS/ngx_openresty.spec
@@ -52,6 +57,9 @@ build_package()
 
 install_test_package()
 {
+	# Try to fix an issue with containers
+	echo "install_test_package PWD:" `pwd`
+	cd ${HERE}
 
 	if [ -f ${HERE}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm ]; then
 		echo -e "\nInstalling package and dependencies...."
