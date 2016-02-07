@@ -10,7 +10,7 @@ LABEL build="160206"
 LABEL image="01"
 
 EXPOSE 80 443
-VOLUME ["opt/ngx_openresty"]
+VOLUME ["/opt/ngx_openresty"]
 
 ENV DIRPATH /opt
 ENV NGXPATH  $DIRPATH/ngx_openresty

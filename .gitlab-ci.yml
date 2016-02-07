@@ -7,7 +7,6 @@ before_script:
 stages:
 - build
 - deploy
-- test
 
 build_job:
   stage: build
@@ -18,8 +17,5 @@ deploy_job:
   stage: deploy
   script:
   - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildinstall
-
-test_job:
-  stage: test
-  script:
+  - /opt/ngx_openresty/nginx/sbin/nginx
   - /builds/william/ngx_openresty-rpm-spec/tests/check_web.sh http://localhost
