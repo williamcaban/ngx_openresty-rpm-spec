@@ -2,7 +2,7 @@
 #
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VERSION=1.9.7.2
-RELEASE=3
+RELEASE=4
 USER=$(whoami)
 SUDO=""
 PWD=`pwd`
@@ -10,6 +10,13 @@ PWD=`pwd`
 # Fix issue with CI builds in docker containers (no sudo available)
 if [[ ! "$USER" == "root" ]]; then
 	SUDO="sudo"
+fi
+if [ -f /.dockerinit ]; then
+    echo "I'm inside matrix ...sudo does not exist ;(";
+    SUDO=""
+else
+    echo "I'm living in real world!";
+    SUDO="sudo"
 fi
 
 
@@ -27,7 +34,6 @@ create_building_environment()
 {
 	echo -e "\nCreating directory structure and setting up SOURCES...."
 	mkdir -p ${HOME}/rpmbuild/{SOURCES,SPECS}
-	ls -lR ${HOME} # DEBUG
 	cp ${HERE}/SOURCES/ngx_openresty.service ${HOME}/rpmbuild/SOURCES/
 	if [ ! -f ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nDownloading tar.gz source from openresty..."
@@ -35,8 +41,6 @@ create_building_environment()
 	fi
 	cp ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ${HOME}/rpmbuild/SOURCES/
 	cp ${HERE}/SPECS/ngx_openresty.spec ${HOME}/rpmbuild/SPECS/
-	echo "DEBUG"
-	ls -lR ${HOME} # DEBUG
 }
 
 build_package()
@@ -51,6 +55,7 @@ build_package()
 
 install_test_package()
 {
+	
 	if [ -f ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm ]; then
 		echo -e "\nInstalling package and dependencies...."
 		${SUDO} yum -y install ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm
@@ -102,7 +107,7 @@ case $1 in
 		build_package
 		;;
 	"buildauto")
-		#install_required_packages
+		install_required_packages
 		create_building_environment
 		build_package
 		;;

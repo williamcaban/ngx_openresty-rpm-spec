@@ -5,13 +5,13 @@ before_script:
 - echo "Starting Gitlab-CI script"
 
 stages:
-- build
+# - build
 - deploy
 
-build_job:
-  stage: build
-  script:
-  - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildauto
+# build_job:
+#   stage: build
+#   script:
+#   - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildauto
 
 deploy_job:
   stage: deploy
