@@ -1,5 +1,8 @@
-#image: centos
-image: registry.snappyvault.com:5000/ngxdev
+
+image: centos
+
+# Internal Lab image (centos + pre-requisites)
+#image: registry.snappyvault.com:5000/ngxdev
 
 before_script:
 - echo "Starting Gitlab-CI script"
@@ -20,3 +23,7 @@ deploy_job:
   - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildinstall
   - /opt/ngx_openresty/nginx/sbin/nginx
   - /builds/william/ngx_openresty-rpm-spec/tests/check_web.sh http://localhost
+
+#
+# END OF FILE
+#
