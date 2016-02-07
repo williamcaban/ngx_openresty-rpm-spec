@@ -1,7 +1,7 @@
 image: centos
 
 before_script:
-- echo "before script"
+- echo "Starting script"
 
 stages:
 - build
@@ -11,7 +11,7 @@ stages:
 build_job:
   stage: build
   script:
-  - BUILD-and-INSTALL.sh go
+  - /builds/william/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh go
 
 test_job:
   stage: test
@@ -21,6 +21,6 @@ test_job:
 deploy_job:
   stage: deploy
   script:
-  - BUILD-and-INSTALL.sh go
+  - /builds/william/ngx_openresty-rpm-spec/BUILD-and-INSTALL.sh go
 
 
