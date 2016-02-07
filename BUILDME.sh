@@ -49,7 +49,9 @@ build_package()
 
 	if [  -f ${HERE}/rpmbuild/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nBuilding package...."
-		rpmbuild -ba ${HERE}/rpmbuild/SPECS/ngx_openresty.spec
+		# for debug
+		ls -lR 
+		rpmbuild --buildroot=${HERE}/rpmbuild -ba ${HERE}/rpmbuild/SPECS/ngx_openresty.spec
 	else
 		echo -e "\nMissing dependency"
 	fi
