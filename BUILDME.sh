@@ -11,9 +11,7 @@ PWD=`pwd`
 if [[ ! "$USER" == "root" ]]; then
 	SUDO="sudo"
 fi
-# Try to fix an issue with containers
-echo "INITIAL HOME:" ${HOME}, "INITIAL HERE" ${HERE}
-ll ${HERE} #DEBUG
+
 
 install_required_packages()
 {
@@ -45,9 +43,6 @@ build_package()
 {
 	if [  -f ${HOME}/rpmbuild/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nBuilding package...."
-		# for debug
-		ln -s /builds/william/ngx_openresty-rpm-spec/rpmbuild /root/rpmbuild 
-
 		rpmbuild --root=${HERE}/rpmbuild -ba ${HOME}/rpmbuild/SPECS/ngx_openresty.spec
 	else
 		echo -e "\nMissing dependency"
@@ -107,12 +102,12 @@ case $1 in
 		build_package
 		;;
 	"buildauto")
-		#install_required_packages
+		install_required_packages
 		create_building_environment
 		build_package
 		;;
 	"buildinstall")
-		#install_required_packages
+		install_required_packages
 		create_building_environment
 		build_package
 		install_test_package
