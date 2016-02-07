@@ -5,20 +5,12 @@ VERSION=1.9.7.2
 RELEASE=4
 USER=$(whoami)
 SUDO=""
-PWD=`pwd`
 
-# Fix issue with CI builds in docker containers (no sudo available)
+# Fix issue with Gitlab CI builds in docker containers
+# (`sudo` is not available)
 if [[ ! "$USER" == "root" ]]; then
 	SUDO="sudo"
 fi
-if [ -f /.dockerinit ]; then
-    echo "I'm inside matrix ...sudo does not exist ;(";
-    SUDO=""
-else
-    echo "I'm living in real world!";
-    SUDO="sudo"
-fi
-
 
 install_required_packages()
 {

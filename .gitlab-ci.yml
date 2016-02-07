@@ -8,6 +8,7 @@ stages:
 # - build
 - deploy
 
+# Note: Build stage covered by deploy stage.
 # build_job:
 #   stage: build
 #   script:

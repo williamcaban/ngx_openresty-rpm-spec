@@ -1,14 +1,14 @@
 #!/bin/bash
 # Based on: Website status checker.
 # Adapted from work by ET (etcs.me)
-# Git: https://github.com/ET-CS/isOnline
+# Based on isOnline: https://github.com/ET-CS/isOnline
 # Original source https://raw.githubusercontent.com/ET-CS/isOnline/master/checker.sh
 
 # Set `Quiet` true when using in scripts
 # Set `Quite` false to show output when run interactively at shell
-QUIET=true
+QUIET=false
 
-function test {
+function test_url {
   response=$(curl --write-out %{http_code} --silent --output /dev/null $1)
   filename=$( echo $1 | cut -f1 -d"/" )
   if [ "$QUIET" = false ] ; then echo -n "$p "; fi
@@ -32,7 +32,7 @@ function test {
 }
 
 # We only need to check if the service is running
-test $1
+test_url $1
 
 #
 # END OF FILE
