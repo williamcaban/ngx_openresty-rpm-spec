@@ -6,6 +6,7 @@ before_script:
 stages:
 - build
 - deploy
+- test
 
 build_job:
   stage: build
