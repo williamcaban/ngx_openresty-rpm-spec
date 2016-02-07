@@ -28,27 +28,27 @@ install_required_packages()
 create_building_environment()
 {
 	echo -e "\nCreating directory structure and setting up SOURCES...."
-	mkdir -p ${HOME}/buildroot/{SOURCES,SPECS}
+	mkdir -p ${HOME}/rpmbuild/{SOURCES,SPECS}
 	ls -lR ${HOME} # DEBUG
-	cp ${HERE}/SOURCES/ngx_openresty.service ${HOME}/buildroot/SOURCES/
+	cp ${HERE}/SOURCES/ngx_openresty.service ${HOME}/rpmbuild/SOURCES/
 	if [ ! -f ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nDownloading tar.gz source from openresty..."
 		curl -o ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz   https://openresty.org/download/ngx_openresty-${VERSION}.tar.gz
 	fi
-	cp ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ${HOME}/buildroot/SOURCES/
-	cp ${HERE}/SPECS/ngx_openresty.spec ${HOME}/buildroot/SPECS/
+	cp ${HERE}/SOURCES/ngx_openresty-${VERSION}.tar.gz ${HOME}/rpmbuild/SOURCES/
+	cp ${HERE}/SPECS/ngx_openresty.spec ${HOME}/rpmbuild/SPECS/
 	echo "DEBUG"
 	ls -lR ${HOME} # DEBUG
 }
 
 build_package()
 {
-	if [  -f ${HOME}/buildroot/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
+	if [  -f ${HOME}/rpmbuild/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nBuilding package...."
 		# for debug
 		ln -s /builds/william/ngx_openresty-rpm-spec/rpmbuild /root/rpmbuild 
 
-		rpmbuild --root=${HERE}/rpmbuild -ba ${HOME}/buildroot/SPECS/ngx_openresty.spec
+		rpmbuild --root=${HERE}/rpmbuild -ba ${HOME}/rpmbuild/SPECS/ngx_openresty.spec
 	else
 		echo -e "\nMissing dependency"
 	fi
@@ -56,9 +56,9 @@ build_package()
 
 install_test_package()
 {
-	if [ -f ${HOME}/buildroot/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm ]; then
+	if [ -f ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm ]; then
 		echo -e "\nInstalling package and dependencies...."
-		${SUDO} yum -y install ${HOME}/buildroot/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm
+		${SUDO} yum -y install ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm
 	else
 		echo -e "\nERROR: No RPM found..."
 	fi
