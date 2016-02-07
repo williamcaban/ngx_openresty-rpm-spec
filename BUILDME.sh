@@ -5,6 +5,7 @@ VERSION=1.9.7.2
 RELEASE=3
 USER=$(whoami)
 SUDO=""
+PWD=`pwd`
 
 # Fix issue with CI builds in docker containers (no sudo available)
 if [[ ! "$USER" == "root" ]]; then
@@ -12,14 +13,14 @@ if [[ ! "$USER" == "root" ]]; then
 fi
 
 # Try to fix an issue with containers
-echo "Current dir:" pwd
+echo "Current dir:" ${PWD}
 cd ${HERE}
-echo "New Current dir:" pwd
+echo "New Current dir:" `pwd`
 
 install_required_packages()
 {
 	echo -e "\nInstalling packages required to build RPMs...."
-	${SUDO} yum -y install epel-release
+	${SUDO} yum -y install epel-release deltarpm
 	${SUDO} yum -y install git make gcc sed postgresql-devel readline-devel \
 	pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel \
 	gd-devel geoip-devel gperftools-devel libatomic_ops-devel rpm-build \
