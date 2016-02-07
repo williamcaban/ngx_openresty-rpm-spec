@@ -43,7 +43,7 @@ build_package()
 {
 	if [  -f ${HOME}/rpmbuild/SOURCES/ngx_openresty-${VERSION}.tar.gz ]; then
 		echo -e "\nBuilding package...."
-		rpmbuild --root=${HERE}/rpmbuild -ba ${HOME}/rpmbuild/SPECS/ngx_openresty.spec
+		rpmbuild -ba ${HOME}/rpmbuild/SPECS/ngx_openresty.spec
 	else
 		echo -e "\nMissing dependency"
 	fi
@@ -102,12 +102,12 @@ case $1 in
 		build_package
 		;;
 	"buildauto")
-		install_required_packages
+		#install_required_packages
 		create_building_environment
 		build_package
 		;;
 	"buildinstall")
-		install_required_packages
+		#install_required_packages
 		create_building_environment
 		build_package
 		install_test_package
