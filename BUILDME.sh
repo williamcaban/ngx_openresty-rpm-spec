@@ -11,6 +11,11 @@ if [[ ! "$USER" == "root" ]]; then
 	SUDO="sudo"
 fi
 
+# Try to fix an issue with containers
+echo "Current dir:" pwd
+cd ${HERE}
+echo "New Current dir:" pwd
+
 install_required_packages()
 {
 	echo -e "\nInstalling packages required to build RPMs...."

@@ -17,4 +17,7 @@ deploy_job:
   script:
   - /builds/william/ngx_openresty-rpm-spec/BUILDME.sh buildinstall
 
-
+test_job:
+  stage: test
+  script:
+  - /builds/william/ngx_openresty-rpm-spec/tests/check_web.sh http://localhost
