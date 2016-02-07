@@ -104,7 +104,7 @@ case $1 in
 		build_package
 		;;
 	"buildinstall")
-		#install_required_packages
+		install_required_packages
 		create_building_environment
 		build_package
 		install_test_package
