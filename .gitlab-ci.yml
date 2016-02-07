@@ -1,5 +1,5 @@
 #image: centos
-image: ngxdev@repository.snappyvault.com:5000
+image: repository.snappyvault.com:5000/ngxdev
 
 before_script:
 - echo "Starting Gitlab-CI script"
