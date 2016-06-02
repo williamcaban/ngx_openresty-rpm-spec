@@ -1,6 +1,6 @@
-Name:		ngx_openresty
-Version:	1.9.7.2
-Release:	4%{?dist}
+Name:		openresty
+Version:	1.9.7.5
+Release:	1%{?dist}
 Summary:	a fast web app server by extending nginx
 Distribution: CentOS 7
 
@@ -8,7 +8,7 @@ Group:		Productivity/Networking/Web/Servers
 License:	BSD
 URL:		openresty.org
 Source0:	http://openresty.org/download/%{name}-%{version}.tar.gz
-Source1:	https://raw.githubusercontent.com/williamcaban/ngx_openresty-rpm-spec/master/SOURCES/ngx_openresty.service
+Source1:	https://raw.githubusercontent.com/williamcaban/ngx_openresty-rpm-spec/master/SOURCES/openresty.service
 Packager:   William Caban <william.caban@savantadvisors.com>
 
 BuildRequires:	sed git make gcc postgresql-devel readline-devel pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel gd-devel geoip-devel gperftools-devel libatomic_ops-devel lua-devel
@@ -16,10 +16,10 @@ Requires:	postgresql readline pcre openssl pcre libxml2 libxslt gd geoip gperfto
 Requires(pre):	shadow-utils
 
 %define user nginx
-%define homedir /opt/ngx_openresty
+%define homedir /opt/openresty
 
 %description
-OpenResty (aka. ngx_openresty) is a full-fledged web application server by bundling the standard Nginx core,
+OpenResty is a full-fledged web application server by bundling the standard Nginx core,
 lots of 3rd-party Nginx modules, as well as most of their external dependencies.
 
 OpenResty is not an Nginx fork. It is just a software bundle.
@@ -109,7 +109,7 @@ getent passwd %{user} || useradd -M -d %{homedir} -g %{user} -s /bin/nologin %{u
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 mkdir -p %{buildroot}/usr/lib/systemd/system/
-cp %{_sourcedir}/ngx_openresty.service %{buildroot}/usr/lib/systemd/system/ngx_openresty.service
+cp %{_sourcedir}/openresty.service %{buildroot}/usr/lib/systemd/system/openresty.service
 
 
 
@@ -120,7 +120,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 
-%attr(755,root,root) /usr/lib/systemd/system/ngx_openresty.service
+%attr(755,root,root) /usr/lib/systemd/system/openresty.service
 %{homedir}/luajit
 %{homedir}/luajit/*
 %{homedir}/lualib
