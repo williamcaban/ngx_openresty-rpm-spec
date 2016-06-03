@@ -3,7 +3,7 @@ Description=The openresty HTTP and reverse proxy server
 After=network.target remote-fs.target nss-lookup.target
 
 [Service]
-EnvironmentFile=-/opt/openresty/openresty.env
+EnvironmentFile=-/opt/openresty/nginx/conf/openresty.env
 Type=forking
 PIDFile=/opt/openresty/nginx/logs/nginx.pid
 ExecStartPre=/opt/openresty/nginx/sbin/nginx -t
