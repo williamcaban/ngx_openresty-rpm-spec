@@ -1,5 +1,5 @@
 Name:		openresty
-Version:	1.9.7.5
+Version:	1.13.6.1
 Release:	1%{?dist}
 Summary:	a fast web app server by extending nginx
 Distribution: CentOS 7
@@ -56,7 +56,6 @@ sha1-asm
 libatomic
 pcre-jit
 luajit
-lua51
 
 %prep
 %setup -q
@@ -94,8 +93,7 @@ lua51
 --with-sha1-asm \
 --with-libatomic \
 --with-pcre-jit \
---with-luajit \
---with-lua51
+--with-luajit
 
 make %{?_smp_mflags}
 
