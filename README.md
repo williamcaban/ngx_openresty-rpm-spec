@@ -1,3 +1,6 @@
+NOTE: This repo has been ###ARCHIVED###
+=======================================
+
 ngx_openresty-rpm-spec for CentOS 7
 ====================================
 
